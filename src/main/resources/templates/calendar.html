@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Family Calendar</title>
+</head>
+<body>
+<h1>Family Calendar</h1>
+<form th:action="@{/addPlan}" method="post">
+  <label for="member">Member:</label>
+  <select name="memberId" id="member">
+    <option th:each="member : ${members}" th:value="${member.id}" th:text="${member.name}"></option>
+  </select>
+  <label for="plan">Plan:</label>
+  <input type="text" name="plan" id="plan" required>
+  <label for="dateTime">Date and Time:</label>
+  <input type="datetime-local" name="dateTime" id="dateTime" required>
+  <button type="submit">Add Plan</button>
+</form>
+<h2>Plans</h2>
+<ul>
+  <li th:each="plan : ${plans}">
+    <span th:text="${plan.member.name}"></span> has a plan:
+    <span th:text="${plan.plan}"></span> on
+    <span th:text="${plan.dateTime}"></span>
+  </li>
+</ul>
+</body>
+</html>
